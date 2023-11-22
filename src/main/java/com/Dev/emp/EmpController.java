@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/MyAPI")
 public class EmpController {
     @Autowired
     private EmployeeRepository repository;
