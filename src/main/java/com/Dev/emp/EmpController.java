@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/MyAPI")
@@ -19,14 +20,37 @@ public class EmpController {
         return ResponseEntity.ok("Working");
     }
 
-    @PostMapping("/addEmployee")
-    public String addEmployee(@RequestBody List<Employee> employeeList) {
+    @PostMapping("/addEmployees")
+    public String addEmployees(@RequestBody List<Employee> employeeList) {
         repository.saveAll(employeeList);
         return employeeList.size()+" "+"Added Successfully!";
     }
-
+    @PostMapping("/addEmployee")
+    public String addEmployee(@RequestBody Employee employee) {
+        repository.save(employee);
+        return "Added Successfully!";
+    }
     @GetMapping("/getAll")
     public List<Employee> getEmployee(){
         return repository.findAll();
+    }
+    @GetMapping("/name/{name}")
+    public Optional<Employee> searchName(@PathVariable("name") String name){
+        return repository.findByFirstName(name);
+    }
+
+    @GetMapping("/designation/{designation}")
+    public List<Employee> byDesignation(@PathVariable("designation") String designation){
+        return repository.findByDesignation(designation);
+    }
+
+    @GetMapping("/city/{city}")
+    public List<Employee> byCity(@PathVariable("city") String city){
+        return repository.findByCity(city);
+    }
+
+    @GetMapping("/gender/{gender}")
+    public List<Employee> byGender(@PathVariable("gender") String gender){
+        return repository.findByGender(gender);
     }
 }
