@@ -27,6 +27,14 @@ public class Employee {
     private double salary;
     private double experience;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getPersonalId() {
         return personalId;
     }

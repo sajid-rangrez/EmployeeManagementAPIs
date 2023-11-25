@@ -53,4 +53,13 @@ public class EmpController {
     public List<Employee> byGender(@PathVariable("gender") String gender){
         return repository.findByGender(gender);
     }
+
+    @GetMapping("/salary/{value}")
+    public List<Employee> bySalary(@PathVariable("value") Long salary){
+        return repository.findBySalaryGreaterThanEqual(salary);
+    }
+//    @GetMapping("/salaryLessThan/{value}")
+//    public List<Employee> lessThanSalary(@PathVariable("value") Long salary){
+//        return repository.findBySalaryEqualLesserThan(salary);
+//    }
 }
