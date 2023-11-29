@@ -4,6 +4,7 @@ import com.Dev.emp.DAO.EmployeeRepository;
 import com.Dev.emp.DTO.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,8 +59,14 @@ public class EmpController {
     public List<Employee> bySalary(@PathVariable("value") Long salary){
         return repository.findBySalaryGreaterThanEqual(salary);
     }
-//    @GetMapping("/salaryLessThan/{value}")
-//    public List<Employee> lessThanSalary(@PathVariable("value") Long salary){
-//        return repository.findBySalaryEqualLesserThan(salary);
-//    }
+    @DeleteMapping("delete/{id}")
+    public String deleteById(@PathVariable("id") Long id){
+        repository.deleteById(id);
+        return "Object Deleted";
+    }
+    @PutMapping("update")
+    public String updateById(@RequestBody Employee employee){
+        repository.save(employee);
+        return "Updated employee with id "+ employee.getId();
+    }
 }
