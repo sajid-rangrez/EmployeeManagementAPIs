@@ -1,6 +1,7 @@
 package com.Dev.emp.config;
 
 
+import com.Dev.emp.DAO.EmployeeRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +16,15 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class MyConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails user = User.builder().username("SAJID").password(passwordEncoder().encode("RANGREZ")).roles("ADMIN").build();
-        return new InMemoryUserDetailsManager(user);
-    }
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails user = User.builder()
+//                .username("sajidhussain3327@gmail.com")
+//                .password(passwordEncoder().encode("RANGREZ"))
+//                .roles("ADMIN").build();
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){

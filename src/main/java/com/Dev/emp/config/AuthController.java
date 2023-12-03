@@ -1,7 +1,10 @@
 package com.Dev.emp.config;
 
+
+import com.Dev.emp.DAO.UserRepository;
 import com.Dev.emp.DTO.JwtRequest;
 import com.Dev.emp.DTO.JwtResponse;
+import com.Dev.emp.DTO.User;
 import com.Dev.emp.security.JWTHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +16,22 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Autowired
+    private UserRepository repo;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private AuthenticationManager manager;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
@@ -58,6 +66,12 @@ public class AuthController {
             throw new BadCredentialsException(" Invalid Username or Password  !!");
         }
 
+    }
+    @PostMapping("/register")
+    public String register(@RequestBody User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        repo.save(user);
+        return "User Addded";
     }
 
     @ExceptionHandler(BadCredentialsException.class)

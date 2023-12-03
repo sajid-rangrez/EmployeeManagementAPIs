@@ -1,6 +1,7 @@
 package com.Dev.emp.DAO;
 
 import com.Dev.emp.DTO.Employee;
+import com.Dev.emp.DTO.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,5 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByCity(String city);
     List<Employee> findByGender(String gender);
     List<Employee> findBySalaryGreaterThanEqual(Long salary);
+
 //    List<Employee> findBySalaryEqualLesserThan(Long salary);
 }
