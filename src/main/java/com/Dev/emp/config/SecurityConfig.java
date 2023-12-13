@@ -30,13 +30,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
-                .authorizeRequests().
-                requestMatchers("MyAPI/").authenticated()
+                .authorizeRequests()
+                .requestMatchers("MyAPI/").authenticated()
                 .requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/auth/register").permitAll()
                 .anyRequest()
                 .authenticated()
-                .and().exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                .and()
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
